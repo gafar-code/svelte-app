@@ -1,1 +1,0 @@
-<h1>Product Header</h1>
