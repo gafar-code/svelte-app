@@ -13,6 +13,8 @@ export const load: PageServerLoad = async ({ params }) => {
     }
 
     return {
-        product: product
+        product: product,
+        title: product.title,
+        description: product.description,
     }
 }

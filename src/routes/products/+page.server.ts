@@ -9,6 +9,8 @@ export const load: PageServerLoad = async ({ parent }) => {
     console.log(user)
 
     return {
-        products: products
+        products: products,
+        title: 'Products',
+        description: 'All products'
     }
 }
