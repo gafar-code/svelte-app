@@ -2,9 +2,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ parent }) => {
     console.log("Server side load")
-    const res = await fetch('https://dummyjson.com/products')
-    const products = (await res.json()).products
-
+    const products = fetch('https://dummyjson.com/products').then(res => res.json().then(data => data.products))
     const { user } = await parent()
     console.log(user)
 

@@ -4,17 +4,26 @@ import type { PageServerLoad } from "./$types"
 export const load: PageServerLoad = async ({ params }) => {
     const { id } = params
 
-    console.log("Server side load")
-    const res = await fetch('https://dummyjson.com/products/' + id)
-    const product = await res.json()
+    let title = 'Product'
+    let description = 'Product description'
 
-    if (!product.id) {
-        throw redirect(302, '/products')
-    }
+    console.log("Server side load")
+    const product = fetch('https://dummyjson.com/products/' + id).then(res => res.json().then((data) => {
+        if (!data) {
+            throw redirect(302, '/products')
+        }
+
+        title = data.title
+        description = data.description
+
+        console.log(data.title)
+
+        return data
+    }))
 
     return {
         product: product,
-        title: product.title,
-        description: product.description,
+        title: title,
+        description: description,
     }
 }
